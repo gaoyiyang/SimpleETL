@@ -6,14 +6,12 @@ import org.sel.init.SimpleEtlInitialization;
 public class DefaultSimpleEtlInitialization implements SimpleEtlInitialization{
 
 	@Override
-	public void after(Columns fromCols, Columns toCols) {
-		// TODO Auto-generated method stub
+	public void after() {
 		
 	}
 
 	@Override
-	public void before() {
-		// TODO Auto-generated method stub
+	public void before(Columns fromCols, Columns toCols) {
 		
 	}
 
