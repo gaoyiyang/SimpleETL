@@ -10,7 +10,7 @@ public class TaskTest extends Task{
 
 	public static void main(String[] args) {
 //		TaskScheduler.execute("test", TaskTest.class, "0/10 * * * * ?", new TaskParams("test",new Date()));
-		System.out.println(new Date(1545876060000L));
+		System.out.println(TaskTest.class.getClassLoader().getResource("jdbc/"));
 	}
 	@Override
 	public void execute(TaskParams params) {
