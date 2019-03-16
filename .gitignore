@@ -27,3 +27,49 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+SimpleETL.iml
+out
+gen### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+### SeamGen template
+/bootstrap/data
+/bootstrap/tmp
+/classes/
+/exploded-archives/
+/test-build/
+/test-output/
+/test-report/
+temp-testng-customsuite.xml
+
+# based on http://stackoverflow.com/a/8865858/422476 I am removing inline comments
+
+#/classes/  		              all class files
+#/dist/                       contains generated war files for deployment
+#/exploded-archives/		      war content generation during deploy (or explode)
+#/test-build/                 test compilation (ant target for Seam)
+#/test-output/                test results
+#/test-report/                test report generation for, e.g., Hudson
+#/target/                     maven output folder
+#temp-testng-customsuite.xml	generated when running test cases under Eclipse
+
+# Thanks to @VonC and @kraftan for their helpful answers on a related question
+# on StackOverflow.com:
+# http://stackoverflow.com/questions/4176687
+# /what-is-the-recommended-source-control-ignore-pattern-for-seam-projects
+
