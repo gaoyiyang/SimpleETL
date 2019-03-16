@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsource>
+	<name>test1</name>
+	<url>jdbc:mysql://140.143.9.46:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;rewriteBatchedStatements=TRUE</url>
+	<user>root</user>
+	<password>960205</password>
+</jsource>
