@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<datasources>
+    <datasource id="1">
+        <driver>com.mysql.cj.jdbc.Driver</driver>
+        <url>jdbc:mysql://140.143.9.46:3306/test1?useUnicode=true&amp;characterEncoding=utf-8</url>
+        <user>root</user>
+        <password>960205</password>
+        <max-size>2</max-size>
+    </datasource>
+    <datasource id="2">
+        <driver>com.mysql.cj.jdbc.Driver</driver>
+        <url>jdbc:mysql://140.143.9.46:3306/test1?useUnicode=true&amp;characterEncoding=utf-8</url>
+        <user>root</user>
+        <password>960205</password>
+    </datasource>
+</datasources>
