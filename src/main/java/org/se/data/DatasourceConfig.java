@@ -1,9 +1,11 @@
 package org.se.data;
 
 import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.se.utils.DBUtil;
 import org.se.utils.FileUtil;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -24,13 +27,13 @@ public class DatasourceConfig {
 
     private static Logger logger = LoggerFactory.getLogger(DatasourceConfig.class);
 
-    private static ConcurrentHashMap<String, DataSource> map;
+    public static ConcurrentHashMap<String, DataSource> map;
 
     static {
         init();
     }
 
-    private static void init() {
+    public static void init() {
         map = new ConcurrentHashMap<String, DataSource>();
         logger.info("加载数据源");
         File f = FileUtil.getClasspathFile("dsconfig.xml");
@@ -38,31 +41,32 @@ public class DatasourceConfig {
             logger.info("数据源加载失败");
             return;
         }
+        SAXReader reader = new SAXReader();
         Document doc = null;
         try {
-            doc = Jsoup.parse(f, "UTF-8");
-        } catch (IOException e) {
+            doc = reader.read(f);
+        } catch (DocumentException e) {
             e.printStackTrace();
         }
         if (doc == null) {
             logger.info("数据源加载失败");
             return;
         }
-        Elements dss = doc.select("datasources datasource");
+        List<Element> dss = doc.selectNodes("/datasources/datasource[@id]");
         Iterator<Element> it = dss.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext()){
             Element e = it.next();
-            String id = e.attr("id");
-            String driver = e.select("driver").text();
-            String url = e.select("url").text();
-            String user = e.select("user").text();
-            String password = e.select("password").text();
-            Elements es = e.select("max-size");
+            String id = e.attributeValue("id");
+            String driver = e.elementText("driver");
+            String url = e.elementText("url");
+            String user = e.elementText("user");
+            String password = e.elementText("password");
+            String ms = e.elementText("max-size");
             int maxSize = 0;
-            if (es.size() != 0) {
-                String ms = es.text();
-                if(StringUtils.isNumeric(ms))
-                    maxSize = Integer.parseInt(ms);
+            if(ms!=null&&StringUtils.isNumeric(ms)){
+                maxSize = Integer.parseInt(ms);
+                if(maxSize < 0)
+                    maxSize = 0;
             }
             DataSource ds = null;
             if(maxSize <= 0)
